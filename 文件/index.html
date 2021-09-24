@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/swiper-bundle.css">
+    <link rel="stylesheet" href="./css/easydropdown.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/silder.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/silder.js"></script>
+    <script src="./js/myCanvas.js"></script>
+
+    <title>印章设计</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h3>印章设计</h3>
+        </div>
+        <div class="content">
+            <!-- 工具栏 -->
+            <div class="tool">
+                <div class="save">
+                    <a href="javascript:;">保存</a>
+                </div>
+                <div class="tool-content-box">
+                    <div class="m-tool-more" id="m_tool_m">
+                        <img src="./images/add-addition-new.svg" alt="">
+                    </div>
+                    <div class="tool-content-inner">
+                        <div class="item item-">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#ffffff" d="M136 153l-37 0 -10 23 -27 0 49 -102 27 0 27 55c-12,5 -22,13 -29,24zm5 -17l-17 -38 -17 38 34 0zm-21 -126c-61,0 -110,50 -110,111 0,61 49,110 110,110 7,0 13,0 20,-2 -7,-6 -12,-14 -16,-23 -1,0 -2,0 -4,0 -47,0 -85,-38 -85,-85 0,-47 38,-85 85,-85 47,0 85,38 85,85 0,1 0,1 0,2 9,3 18,8 24,15 1,-6 2,-12 2,-17 0,-61 -50,-111 -111,-111zm60 140l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -28 0 -2zm2 -15c-30,4 -50,30 -46,58 3,27 27,50 58,46 16,-2 27,-10 34,-18 19,-23 15,-57 -6,-74 -11,-9 -24,-14 -40,-12z"></path></svg>
+                        </div>
+                        <div class="item">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#ffffff" d="M5 236l60 1 15 -38 45 0c-1,-20 3,-35 15,-50 1,-1 1,-2 2,-2l-41 -1 24 -59 22 54c1,0 7,-5 10,-7 13,-8 27,-11 43,-10l-45 -113 -60 0 -90 225zm180 -82l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12z"></path></svg>
+                        </div>
+                        <div class="item">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#ffffff" d="M125 15c-61,0 -110,49 -110,110 0,61 49,110 110,110 7,0 13,0 20,-1 -7,-7 -12,-15 -16,-24 -1,0 -3,0 -4,0 -47,0 -85,-38 -85,-85 0,-47 38,-85 85,-85 47,0 85,38 85,85 0,1 0,2 0,2 9,3 17,8 24,15 1,-6 1,-11 1,-17 0,-61 -49,-110 -110,-110zm60 139l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12z"></path></svg>
+                        </div>
+                        <div class="item">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path class="add_el_path" fill="#ffffff" d="M185 154l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12zm-83 -25c0,-11 -8,-20 -19,-20 -11,0 -20,9 -20,20 0,11 9,20 20,20 11,0 19,-9 19,-20zm-44 72l0 23 69 0c-2,-7 -4,-14 -4,-21 0,-22 12,-41 29,-53l-9 -12 -20 29 -25 -11 -40 45zm32 -174l-58 61 0 164 114 0c-5,-5 -9,-9 -12,-14l-88 0 0 -144 53 0 0 -53 101 0 0 99c5,1 9,3 14,5l0 -118 -124 0zm-5 26l0 27 -25 0 25 -27z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="choose-model" id="ch_m">
+                    <a href="javascript:;">新的印章+</a>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <!-- 内容导航 -->
+                <div class="nav">
+                    <div class="nav-cnt-box">
+                        <div class="arrow-l" id="arrow_r"><img src="./images/arrow_left.png" alt=""></div>
+                        <div class="cnt-box-out">
+                            <ul id="cnt-box-inner" style=" left: 0px;">
+                                <!-- <li class="cnt-item active" data-id="#0">
+                                    <a href="javascript:;">文字#0</a>
+                                    <div class="cls"></div>
+                                </li>
+                                <li class="cnt-item" data-id="#1">
+                                    <div class="cls"></div>
+                                    <a href="javascript:;">形状#1</a>
+                                </li> -->
+
+                            </ul>
+                        </div>
+
+                        <div class="arrow-r" id="arrow_l"><img src="./images/arrow_right.png" alt=""></div>
+                    </div>
+
+                </div>
+                <!-- 内容显示 -->
+                <div class="content-box">
+                    <!-- 内容导航 -->
+
+                    <div class="m-nav">
+                        <div class="nav-cnt-box">
+                            <div class="arrow-l" id="m_arrow_r"><img src="./images/arrow_left.png" alt=""></div>
+                            <div class="cnt-box-out">
+                                <ul id="m-cnt-box-inner" style=" left: 0px;">
+                                    <li class="cnt-item active" data-id="0">
+                                        <a href="javascript:;">文字#0</a>
+                                        <div class="cls"></div>
+                                    </li>
+                                    <li class="cnt-item" data-id="1">
+                                        <div class="cls"></div>
+                                        <a href="javascript:;">文字#1</a>
+                                    </li>
+                                    <li class="cnt-item" data-id="2">
+                                        <div class="cls"></div>
+                                        <a href="javascript:;">文字#2</a>
+                                    </li>
+                                    <li class="cnt-item" data-id="3">
+                                        <div class="cls"></div>
+                                        <a href="javascript:;">文字#3</a>
+                                    </li>
+                                    <li class="cnt-item" data-id="4">
+                                        <div class="cls"></div>
+                                        <a href="javascript:;">文字#4</a>
+                                    </li>
+                                    <li class="cnt-item" data-id="5">
+                                        <div class="cls"></div>
+                                        <a href="javascript:;">文字#5</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="arrow-r" id="m_arrow_l"><img src="./images/arrow_right.png" alt=""></div>
+                        </div>
+
+                    </div>
+                    <div class="canvas-box">
+                        <div class="canvas-inner">
+                            <canvas width="266" height="266" id="cvs"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="style-edit" id="edit_menu">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="type-seal-choones">
+
+        <div class="type-seal">
+            <div class="ts-cls">×</div>
+            <h3>请选择印章形状</h3>
+            <div class="ts-item">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="36px" height="36px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#427fed" d="M125 15c-61,0 -110,49 -110,110 0,61 49,110 110,110 7,0 13,0 20,-1 -7,-7 -12,-15 -16,-24 -1,0 -3,0 -4,0 -47,0 -85,-38 -85,-85 0,-47 38,-85 85,-85 47,0 85,38 85,85 0,1 0,2 0,2 9,3 17,8 24,15 1,-6 1,-11 1,-17 0,-61 -49,-110 -110,-110zm60 139l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12z"></path></svg>
+                <p>圆形</p>
+            </div>
+            <div class="ts-item">
+                <svg style="transform: scale(1.2,1) translateX(10%);" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="36px" height="36px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#427fed" d="M125 15c-61,0 -110,49 -110,110 0,61 49,110 110,110 7,0 13,0 20,-1 -7,-7 -12,-15 -16,-24 -1,0 -3,0 -4,0 -47,0 -85,-38 -85,-85 0,-47 38,-85 85,-85 47,0 85,38 85,85 0,1 0,2 0,2 9,3 17,8 24,15 1,-6 1,-11 1,-17 0,-61 -49,-110 -110,-110zm60 139l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12z"></path></svg>
+                <p>椭圆</p>
+            </div>
+            <div class="ts-item">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="36px" height="36px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#427fed" d="M185 154l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12zm-187 -120l250 0 0 136c-7,-11 -17,-19 -29,-25l0 -80 -193 0 0 148 98 0c2,12 7,23 15,31l-141 0 0 -210z"></path></svg>
+                <p>方形</p>
+            </div>
+            <div class="ts-item">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="36px" height="36px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#427fed" d="M185 154l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12zm-187 -120l250 0 0 136c-7,-11 -17,-19 -29,-25l0 -80 -193 0 0 148 98 0c2,12 7,23 15,31l-141 0 0 -210z"></path></svg>
+                <p>正方形</p>
+            </div>
+        </div>
+    </div>
+    <img id="img" src="./images/Image1.png" alt="" style="display: none;">
+</body>
+<script src="./js/common.js"></script>
+
+
+<script>
+    // 限制器
+    var lockL = true;
+    var lockR = true;
+    var mLockL = true;
+    var mLockR = true;
+
+    // 印章类型选择框
+    $('#ch_m').click(function() {
+        $('.type-seal-choones').show();
+    })
+    $('.ts-item').click(function() {
+        $('.type-seal-choones').hide();
+    })
+    $('.ts-cls').click(function() {
+        $('.type-seal-choones').hide();
+    })
+    $('.ts-cls').click(function() {
+        $('.type-seal-choones').hide();
+    })
+
+    // 工具栏移动端显示点击事件
+    $('#m_tool_m').click(function() {
+        $('.tool-content-inner').fadeToggle();
+    });
+
+    //文本图像菜单监听
+    $('#arrow_l').click(function() {
+
+
+        if (lockL) {
+            lockL = false;
+            var left = $('#cnt-box-inner').position().left;
+            if ($('#cnt-box-inner').width() - Math.abs(left) >= 700) {
+                left = left - 140;
+                $('#cnt-box-inner').css({
+                    left: left
+
+                })
+
+            }
+        }
+        setTimeout(function() {
+            lockL = true;
+        }, 500)
+    })
+    $('#arrow_r').click(function() {
+        if (lockR) {
+
+            lockR = false;
+            var left = $('#cnt-box-inner').position().left;
+
+
+            if (left < 0) {
+                left = left + 140;
+                $('#cnt-box-inner').css({
+                    left: left
+
+                })
+
+            }
+        }
+        setTimeout(function() {
+            lockR = true;
+        }, 500)
+    })
+
+    //移动端文本图像菜单监听
+    $('#m_arrow_l').click(function() {
+
+
+        if (mLockL) {
+            mLockL = false;
+            // console.log($('#m-cnt-box-inner').position().top)
+            var top = $('#m-cnt-box-inner').position().top;
+            if ($('#m-cnt-box-inner').height() - Math.abs(top) >= 190) {
+                top = top - 50;
+                $('#m-cnt-box-inner').css({
+                    top: top
+
+                })
+
+            }
+        }
+        setTimeout(function() {
+            mLockL = true;
+        }, 500)
+    })
+    $('#m_arrow_r').click(function() {
+
+
+        if (mLockR) {
+            mLockR = false;
+            // console.log($('#m-cnt-box-inner').position().top) 
+            var top = $('#m-cnt-box-inner').position().top;
+            if (top < 0) {
+                top = top + 50;
+                $('#m-cnt-box-inner').css({
+                    top: top
+
+                })
+
+            }
+        }
+        setTimeout(function() {
+            mLockR = true;
+        }, 500)
+    })
+</script>
+
+
+<script>
+    const appendMenuData = Common.appendMenuData;
+    const appendEditMenu = Common.appendEditMenu;
+    const bindEvent = Common.bindEvent;
+    const canvas = document.getElementById("cvs");
+    const ctx = canvas.getContext("2d");
+
+    //印章内容对象数组
+    let contentList = [];
+
+
+
+
+    const myCanvasOne = new myCanvas(canvas);
+
+
+    contentList.push({
+        id: contentList.length,
+        type: 'textShape',
+        obj: new roundText()
+    });
+    contentList.push({
+        id: contentList.length,
+        type: 'normalText',
+        obj: new normalText()
+    });
+    contentList.push({
+        id: contentList.length,
+        type: 'roundShape',
+        obj: new roundShape()
+    });
+
+
+
+
+
+    // contentList.push({
+    //     id: contentList.length,
+    //     type: 'imgShape',
+    //     obj: new imgShape({
+    //         img: document.getElementById('img')
+    //     })
+    // });
+
+    //渲染画布
+    myCanvasOne.init(contentList);
+
+
+
+    //渲染菜单
+    appendMenuData("#cnt-box-inner", contentList, true);
+    appendEditMenu("#edit_menu", contentList, true, 0);
+
+    //突出当前显示对象事件
+    bindEvent('.cnt-item', function() {
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+        appendEditMenu("#edit_menu", contentList, true, $(this).attr('data-id'));
+
+
+    });
+    bindEvent('.cnt-item', function() {
+        $(this).siblings().removeClass('active-bg');
+        $(this).addClass('active-bg');
+        myCanvasOne.showCurrent(contentList, $(this).attr('data-id'));
+    }, "mouseenter");
+    bindEvent('.cnt-item', function() {
+        $(this).removeClass('active-bg');
+        myCanvasOne.init(contentList);
+    }, "mouseleave");
+    bindEvent('.cls', function() {
+        $(this).parent().remove();
+        contentList[$(this).parent().attr('data-id')].obj = null;
+        myCanvasOne.init(contentList);
+
+    });
+</script>
+
+
+
+
+</html>

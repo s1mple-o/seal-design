@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Text</title>
+    <style type="text/css">
+        body {
+            font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+            background-color: #42413C;
+            margin: 0;
+            padding: 0;
+            color: #000;
+        }
+        
+        .operations {
+            margin-left: 200px;
+            float: left;
+            font-size: 1.5em;
+        }
+        
+        .operations option {
+            font-size: 18px;
+        }
+        
+        .container {
+            margin: 10px auto 0px;
+            width: 600px;
+        }
+        
+        canvas {
+            border: 1px solid cornflowerblue;
+            background: #eeeeee;
+            -webkit-box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+            -moz-box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+            -mx-box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+            box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="canvas" width='600' height='420'>Canvas not supported</canvas>
+    </div>
+
+    <script type="text/javascript">
+        var canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d');
+
+        function drawAxis() {
+            context.beginPath();
+            context.moveTo(0, canvas.height / 2);
+            context.lineTo(canvas.width, canvas.height / 2);
+            context.stroke();
+        }
+
+        function drawCurve(step) {
+            // 字符串总宽度
+            var stringWidth = context.measureText(textString).width;
+            // 计算曲线的总长度
+            var totalDistance = 0;
+            x = 0;
+            y = canvas.height / 2;
+            for (i = 0; i <= canvas.width; i += step) {
+                y1 = canvas.height / 2 - Math.sin(i * Math.PI * 2 / canvas.width) * 100;
+                totalDistance += Math.sqrt((i - x) * (i - x) + (y1 - y) * (y1 - y));
+                x = i;
+                y = y1;
+            }
+            // 字符绘制标志，初始化全部为false，表示没有绘制
+            lb = new Array(textString.length);
+            for (i = 0; i < textString.length; i++) {
+                lb[i] = false;
+            }
+
+            context.beginPath();
+            context.moveTo(0, canvas.height / 2);
+            // 绘制的字符索引
+            var index = 0;
+            // 上次绘制点的坐标，用来计算距离，初始化为绘制坐标的坐标原点
+            x = 0;
+            y = canvas.height / 2;
+            // 计算当前已经经过的曲线距离
+            distance = 0;
+            for (i = 0; i <= canvas.width; i += step) {
+                y1 = canvas.height / 2 - Math.sin(i * Math.PI * 2 / canvas.width) * 100;
+                context.lineTo(i, y1);
+                distance += Math.sqrt((i - x) * (i - x) + (y1 - y) * (y1 - y));
+                x = i;
+                y = y1;
+
+                // 计算当前经过的曲线距离在总曲线长度中的比例是否大于子字符串的文字宽度在总的字符串文字宽度的比例，
+                // 如果大于，表示需要绘制文字。绘制时需要判断当前的文字是否绘制过了，绘制过了则不再绘制，避免步长小于单个字符宽度时造成文字重叠绘制。
+                b = (distance / totalDistance > context.measureText(textString.substr(0, index)).width / stringWidth);
+                if (!lb[index] && b) {
+                    character = textString.charAt(index);
+                    context.translate(i, canvas.height / 2 - Math.sin(i * Math.PI * 2 / canvas.width) * 100);
+                    context.fillStyle = 'rgba(0,0,255,0.8)';
+                    context.fillText(character, 0, 0);
+                    context.stroke(character, 0, 0);
+                    context.setTransform(1, 0, 0, 1, 0, 0);
+                    lb[index++] = true;
+                }
+            }
+            context.lineTo(canvas.width, canvas.height / 2);
+            context.stroke();
+        }
+
+        function drawText() {
+            context.save();
+            context.beginPath();
+            for (i = 0; i <= textString.length; i++) {
+                character = textString.charAt(i);
+                context.translate(i / textString.length * canvas.width, canvas.height / 2 - Math.sin(i * Math.PI * 2 / textString.length) * 100);
+                //context.rotate(Math.cos(i*Math.PI*2/textString.length));
+                context.fillText(character, 0, 0);
+                context.stroke(character, 0, 0);
+                context.setTransform(1, 0, 0, 1, 0, 0);
+            }
+            context.restore();
+        }
+
+        function animateDrawSin(step) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawAxis();
+            if (step < 1) {
+                drawCurve(1);
+                return;
+            } else {
+                drawCurve(step);
+            }
+            // 注意这里不能直接写animateDrawSin(step-1)，会造成不延迟，但是函数是调用成功的，还没有搞的很清楚。
+            setTimeout(function() {
+                animateDrawSin(step - 1)
+            }, 100);
+        }
+
+        function animate() {
+            drawAxis();
+            var step = canvas.width;
+            animateDrawSin(step);
+            //drawText();
+        }
+        var textString = 'HTML5 HTML5 HTML5 HTML5 HTML5 HTML5 HTML5 HTML5 HTML5';
+        context.lineWidth = 0.5;
+        context.font = '10pt Comic-sans';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        animate();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Text</title>
+    <style type="text/css">
+        body {
+            font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+            background-color: #42413C;
+            margin: 0;
+            padding: 0;
+            color: #000;
+        }
+        
+        .operations {
+            margin-left: 200px;
+            float: left;
+            font-size: 1.5em;
+        }
+        
+        .operations option {
+            font-size: 18px;
+        }
+        
+        .container {
+            margin: 10px auto 0px;
+            width: 600px;
+        }
+        
+        canvas {
+            border: 1px solid cornflowerblue;
+            background: #eeeeee;
+            -webkit-box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+            -moz-box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+            -mx-box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+            box-shadow: rgba(200, 200, 255, 0.9) 5px 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="canvas" width='266' height='266'>Canvas not supported</canvas>
+    </div>
+
+    <script>
+        var canvas = document.getElementById("canvas")
+        var context = canvas.getContext("2d")
+
+        var TEXT_FILL_STYLE = "rgba(100,130,240,0.5)"
+            // var TEXT_STROKE_STYLE = "rgba(200,0,0,0.7)"
+        var TEXT_SIZE = 18;
+        circle = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 100
+        }
+
+        function drawCircularText(string, startAngle, endAngle) {
+            var radius = circle.radius //圆的半径
+            var angleDecrement = (startAngle - endAngle) / (string.length - 1) //每个字母占的弧度
+            var angle = parseFloat(startAngle) //转一下数字
+            var index = 0;
+            var character;
+
+            context.save()
+                // context.fillStyle = TEXT_FILL_STYLE;
+                // context.strokeStyle = TEXT_STROKE_STYLE;
+            context.font = TEXT_SIZE + "px Lucida Sans"
+
+            while (index < string.length) {
+                character = string.charAt(index)
+                context.save()
+                context.beginPath()
+                context.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                context.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                context.fillText(character, 0, 0)
+                context.strokeText(character, 0, 0)
+                angle -= angleDecrement
+                index++
+                context.restore()
+
+            }
+            context.restore()
+        }
+        context.textAlign = "center"
+        context.textBaseLine = "middle"
+        drawCircularText("样本XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", Math.PI / 2, -Math.PI * 3 / 2) //第三个参数表示文字首位是否相接 差了多少弧度
+    </script>
+
+    <script>
+        class father {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        const children = new father(1, 2);
+        console.log(children)
+    </script>
+</body>
+
+</html>
