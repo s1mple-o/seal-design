@@ -24,7 +24,7 @@
         <div class="content">
             <!-- 工具栏 -->
             <div class="tool">
-                <div class="save">
+                <div class="save" id="save">
                     <a href="javascript:;">保存</a>
                 </div>
                 <div class="tool-content-box">
@@ -32,22 +32,28 @@
                         <img src="./images/add-addition-new.svg" alt="">
                     </div>
                     <div class="tool-content-inner">
-                        <div class="item item-">
+                        <div class="item item-st">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#ffffff" d="M136 153l-37 0 -10 23 -27 0 49 -102 27 0 27 55c-12,5 -22,13 -29,24zm5 -17l-17 -38 -17 38 34 0zm-21 -126c-61,0 -110,50 -110,111 0,61 49,110 110,110 7,0 13,0 20,-2 -7,-6 -12,-14 -16,-23 -1,0 -2,0 -4,0 -47,0 -85,-38 -85,-85 0,-47 38,-85 85,-85 47,0 85,38 85,85 0,1 0,1 0,2 9,3 18,8 24,15 1,-6 2,-12 2,-17 0,-61 -50,-111 -111,-111zm60 140l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -28 0 -2zm2 -15c-30,4 -50,30 -46,58 3,27 27,50 58,46 16,-2 27,-10 34,-18 19,-23 15,-57 -6,-74 -11,-9 -24,-14 -40,-12z"></path></svg>
                         </div>
-                        <div class="item">
+
+                        <div class="item item-nt">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#ffffff" d="M5 236l60 1 15 -38 45 0c-1,-20 3,-35 15,-50 1,-1 1,-2 2,-2l-41 -1 24 -59 22 54c1,0 7,-5 10,-7 13,-8 27,-11 43,-10l-45 -113 -60 0 -90 225zm180 -82l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12z"></path></svg>
                         </div>
-                        <div class="item">
+                        <div class="item item-rf">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#ffffff" d="M185 154l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12zm-187 -120l250 0 0 136c-7,-11 -17,-19 -29,-25l0 -80 -193 0 0 148 98 0c2,12 7,23 15,31l-141 0 0 -210z"></path></svg>
+                        </div>
+                        <div class="item item-sp">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#ffffff" d="M125 15c-61,0 -110,49 -110,110 0,61 49,110 110,110 7,0 13,0 20,-1 -7,-7 -12,-15 -16,-24 -1,0 -3,0 -4,0 -47,0 -85,-38 -85,-85 0,-47 38,-85 85,-85 47,0 85,38 85,85 0,1 0,2 0,2 9,3 17,8 24,15 1,-6 1,-11 1,-17 0,-61 -49,-110 -110,-110zm60 139l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12z"></path></svg>
                         </div>
-                        <div class="item">
+                        <div class="item item-img">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 250 250" width="24px" height="24px" version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><path class="add_el_path" fill="#ffffff" d="M185 154l15 0 0 30 30 0 0 15 -30 0 0 30 -15 0 0 -30 -30 0 0 -15 30 0 0 -27 0 -3zm2 -15c-30,4 -50,30 -47,58 3,27 28,50 58,47 16,-2 28,-10 35,-19 19,-22 15,-56 -6,-74 -11,-8 -25,-14 -40,-12zm-83 -25c0,-11 -8,-20 -19,-20 -11,0 -20,9 -20,20 0,11 9,20 20,20 11,0 19,-9 19,-20zm-44 72l0 23 69 0c-2,-7 -4,-14 -4,-21 0,-22 12,-41 29,-53l-9 -12 -20 29 -25 -11 -40 45zm32 -174l-58 61 0 164 114 0c-5,-5 -9,-9 -12,-14l-88 0 0 -144 53 0 0 -53 101 0 0 99c5,1 9,3 14,5l0 -118 -124 0zm-5 26l0 27 -25 0 25 -27z"></path></svg>
                         </div>
+
+
                     </div>
                 </div>
                 <div class="choose-model" id="ch_m">
-                    <a href="javascript:;">新的印章+</a>
+                    <!-- <a href="javascript:;">新的印章+</a> -->
                 </div>
             </div>
             <div class="content-bottom">
@@ -115,7 +121,7 @@
                     </div>
                     <div class="canvas-box">
                         <div class="canvas-inner">
-                            <canvas width="266" height="266" id="cvs"></canvas>
+                            <canvas width="250" height="250" id="cvs"></canvas>
                         </div>
                     </div>
 
@@ -150,7 +156,6 @@
             </div>
         </div>
     </div>
-    <img id="img" src="./images/Image1.png" alt="" style="display: none;">
 </body>
 <script src="./js/common.js"></script>
 
@@ -297,18 +302,16 @@
         type: 'roundShape',
         obj: new roundShape()
     });
+    contentList.push({
+        id: contentList.length,
+        type: 'rectFrame',
+        obj: new rectFrame()
+    });
 
 
 
 
 
-    // contentList.push({
-    //     id: contentList.length,
-    //     type: 'imgShape',
-    //     obj: new imgShape({
-    //         img: document.getElementById('img')
-    //     })
-    // });
 
     //渲染画布
     myCanvasOne.init(contentList);
@@ -319,32 +322,79 @@
     appendMenuData("#cnt-box-inner", contentList, true);
     appendEditMenu("#edit_menu", contentList, true, 0);
 
-    //突出当前显示对象事件
-    bindEvent('.cnt-item', function() {
-        $(this).siblings().removeClass('active');
-        $(this).addClass('active');
-        appendEditMenu("#edit_menu", contentList, true, $(this).attr('data-id'));
 
-
-    });
-    bindEvent('.cnt-item', function() {
-        $(this).siblings().removeClass('active-bg');
-        $(this).addClass('active-bg');
-        myCanvasOne.showCurrent(contentList, $(this).attr('data-id'));
-    }, "mouseenter");
-    bindEvent('.cnt-item', function() {
-        $(this).removeClass('active-bg');
+    bindEvent('.item-st', function() {
+        contentList.push({
+            id: contentList.length,
+            type: 'textShape',
+            obj: new roundText()
+        });
+        //渲染画布
         myCanvasOne.init(contentList);
-    }, "mouseleave");
-    bindEvent('.cls', function() {
-        $(this).parent().remove();
-        contentList[$(this).parent().attr('data-id')].obj = null;
+        //渲染菜单
+        appendMenuData("#cnt-box-inner", contentList, true);
+        appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
+    })
+    bindEvent('.item-nt', function() {
+        contentList.push({
+            id: contentList.length,
+            type: 'normalText',
+            obj: new normalText()
+        });
+        //渲染画布
         myCanvasOne.init(contentList);
+        //渲染菜单
+        appendMenuData("#cnt-box-inner", contentList, true);
+        appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
+    })
+    bindEvent('.item-sp', function() {
+        contentList.push({
+            id: contentList.length,
+            type: 'roundShape',
+            obj: new roundShape()
+        });
+        //渲染画布
+        myCanvasOne.init(contentList);
+        //渲染菜单
+        appendMenuData("#cnt-box-inner", contentList, true);
+        appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
+    })
+    bindEvent('.item-rf', function() {
+        contentList.push({
+            id: contentList.length,
+            type: 'rectFrame',
+            obj: new rectFrame()
+        });
+        //渲染画布
+        myCanvasOne.init(contentList);
+        //渲染菜单
+        appendMenuData("#cnt-box-inner", contentList, true);
+        appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
+    })
+    bindEvent('.item-img', function() {
+        contentList.push({
+            id: contentList.length,
+            type: 'imgShape',
+            obj: null
+        });
+        // //渲染画布
+        // myCanvasOne.init(contentList);
 
-    });
+        //渲染菜单
+        appendMenuData("#cnt-box-inner", contentList, true);
+        appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
+    })
+</script>
+<script>
 </script>
 
+<script>
+    //发送图片数据
+    $("#save").click(function() {
+        var data = canvas.toDataURL('image/png');
+        // console.log(data)
 
-
+    })
+</script>
 
 </html>

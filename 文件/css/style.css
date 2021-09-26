@@ -205,6 +205,9 @@ a {
 .content-box .canvas-box {
     width: 266px;
     height: 266px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #fff;
 }
 
@@ -424,8 +427,28 @@ a {
 }
 
 .canvas-inner {
+    width: 250px;
+    height: 250px;
     background: url(../images/set3.svg) no-repeat center center;
-    background-size: cover;
+    background-size: 100% 100%;
+}
+
+.img-box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.img-box .img-item {
+    width: 18%;
+    cursor: pointer;
+    margin: 0 1% 20px;
+}
+
+.img-box .img-item img {
+    width: 100%;
+    height: 100%;
 }
 
 @media screen and (max-width: 800px) {

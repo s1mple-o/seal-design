@@ -169,8 +169,8 @@ class normalText {
     constructor(obj) {
         obj = obj || {};
         this.str = obj.str || '样本'
-        this.x = obj.x || 133;
-        this.y = obj.y || 133;
+        this.x = obj.x || 125;
+        this.y = obj.y || 125;
         this.fontSize = obj.fontSize || 18;
         this.rotation = obj.rotation || 50;
         this.fontFamily = obj.fontFamily || 'arial';
@@ -194,10 +194,10 @@ class normalText {
     }
 
     setX(x) {
-        this.x = x * 133 / 50;
+        this.x = x * 125 / 50;
     }
     setY(y) {
-        this.y = y * 133 / 50;
+        this.y = y * 125 / 50;
     }
     setFontSize(fontSize) {
         this.fontSize = fontSize;
@@ -230,8 +230,8 @@ class imgShape {
     constructor(obj) {
         obj = obj || {};
         this.img = obj.img || null;
-        this.x = obj.x || 133;
-        this.y = obj.y || 133;
+        this.x = obj.x || 125;
+        this.y = obj.y || 125;
         this.imgSize = obj.imgSize || 200;
         this.rotation = obj.rotation || 50;
     }
@@ -243,10 +243,10 @@ class imgShape {
         ctx.restore()
     }
     setX(x) {
-        this.x = x;
+        this.x = x * 125 / 50;
     }
-    setY(Y) {
-        this.y = y;
+    setY(y) {
+        this.y = y * 125 / 50;
     }
     setImg(img) {
         this.img = img;
@@ -254,5 +254,50 @@ class imgShape {
 
     setSize(imgSize) {
         this.imgSize = imgSize;
+    }
+    setRotation(rotation) {
+        this.rotation = rotation;
+    }
+}
+
+
+
+
+
+/*
+ *矩形类
+ *@param {element} img 图片元素
+ *@param {String|Number} x 图片X坐标
+ *@param {String|Number} y 图片Y坐标
+ *@param {String|Number} width 宽度
+ *@param {String|Number} heigth 高度
+ */
+
+class rectFrame {
+    constructor(obj) {
+        obj = obj || {};
+        this.width = obj.width || 240;
+        this.height = obj.height || 240;
+        this.x = obj.x || 5;
+        this.y = obj.y || 5;
+    }
+    draw() {
+        ctx.save();
+        ctx.strokeRect(this.x, this.y, this.width, this.height)
+
+        ctx.restore()
+    }
+    setWidth(width) {
+        this.width = width > 240 ? 240 : width;
+
+    }
+    setHeight(height) {
+        this.height = height > 240 ? 250 : height;
+    }
+    setX(x) {
+        this.x = x * 250 / 100;
+    }
+    setY(y) {
+        this.y = y * 250 / 100;
     }
 }

@@ -176,23 +176,56 @@
                  switch (countList[i].type) {
                      case 'textShape':
                          type = '圆形文本';
+                         html += exports.renderTemplate(template, {
+                             id: countList[i].id,
+                             type: type
+
+                         });
                          break;
                      case 'roundShape':
                          type = '圆形形状';
-                         break;
-                     case 'imgShape':
-                         type = '图形';
+                         html += exports.renderTemplate(template, {
+                             id: countList[i].id,
+                             type: type
+
+                         });
                          break;
                      case 'normalText':
                          type = '文本';
+                         html += exports.renderTemplate(template, {
+                             id: countList[i].id,
+                             type: type
+
+                         });
+                         break;
+                     case 'imgShape':
+                         type = '图形';
+                         html += exports.renderTemplate(template, {
+                             id: countList[i].id,
+                             type: type
+
+                         });
+                         break;
+                     case 'rectFrame':
+                         type = '矩形框';
+                         html += exports.renderTemplate(template, {
+                             id: countList[i].id,
+                             type: type
+
+                         });
                          break;
                  }
-                 html += exports.renderTemplate(template, {
-                     id: countList[i].id,
-                     type: type
 
-                 });
+             } else {
+                 if (countList[i].type == 'imgShape') {
+                     html += exports.renderTemplate(template, {
+                         id: countList[i].id,
+                         type: '图形'
+
+                     });
+                 }
              }
+
 
 
 
@@ -201,6 +234,27 @@
          var child = exports.parseHtml(html);
 
          dom.appendChild(child);
+         //突出当前显示对象事件
+         exports.bindEvent('.cnt-item', function() {
+             $(this).siblings().removeClass('active');
+             $(this).addClass('active');
+             appendEditMenu("#edit_menu", contentList, true, $(this).attr('data-id'));
+         });
+         exports.bindEvent('.cnt-item', function() {
+             $(this).siblings().removeClass('active-bg');
+             $(this).addClass('active-bg');
+             myCanvasOne.showCurrent(contentList, $(this).attr('data-id'));
+         }, "mouseenter");
+         exports.bindEvent('.cnt-item', function() {
+             $(this).removeClass('active-bg');
+             myCanvasOne.init(contentList);
+         }, "mouseleave");
+         exports.bindEvent('.cls', function() {
+             $(this).parent().remove();
+             contentList[$(this).parent().attr('data-id')].obj = null;
+             myCanvasOne.init(contentList);
+
+         });
      };
 
      /**
@@ -423,7 +477,91 @@
 
         </div>`
          } else if (countList[id].type == 'imgShape') {
-             var template = ``;
+             var imgBox = `<div class="img-box" data-id="{{id}}">
+            <div class="img-item" data-id="0">
+                <img src="./images/Image1.png" alt="">
+            </div>
+            <div class="img-item" data-id="1">
+                <img src="./images/Image2.png" alt="">
+            </div>
+            <div class="img-item" data-id="2">
+                <img src="./images/Image3.png" alt="">
+            </div>
+            <div class="img-item" data-id="3">
+                <img src="./images/Image4.png" alt="">
+            </div>
+            <div class="img-item" data-id="4">
+                <img src="./images/Image5.png" alt="">
+            </div>
+            <div class="img-item" data-id="5">
+                <img src="./images/Image6.png" alt="">
+            </div>
+            <div class="img-item" data-id="6">
+                <img src="./images/Image7.png" alt="">
+            </div>
+        </div>`;
+             var template = ` 
+         <div class="item item-img" data-id="{{id}}">
+
+         <div class="text-zui text-radius">
+             <p>半径 [<span class="num">{{imgSize}}</span>]</p>
+             <div class="tr-box" id="tr_img">
+
+             </div>
+         </div>
+         <div class="text-zui text-radius">
+                <p>相当于X的位置 [<span class="num">{{x}}</span>]</p>
+                <div class="tr-box" id="trx_img">
+
+                </div>
+            </div>
+            <div class="text-zui text-arc">
+                <p>相当于Y的位置 [<span class="num">{{y}}</span>]</p>
+                <div class="tr-box" id="tarc_img">
+
+                </div>
+            </div>
+            <div class="text-zui text-sp">
+                <p>Rotation [<span class="num">{{rotation}}</span>]</p>
+                <div class="tr-box" id="tsp_img">
+
+                </div>
+            </div>
+            <!-- <button id="chImg">选择图片</button>-->
+
+     </div>`;
+         } else if (countList[id].type == 'rectFrame') {
+             var template = `<div class="item shape" data-id="{{id}}">
+
+             <div class="text-zui text-size">
+                <p>宽 [<span class="num">{{rWidth}}</span>]</p>
+                <div class="tr-box" id="tr_w">
+
+                </div>
+                 
+             </div>
+             <div class="text-zui text-size">
+             <p>高 [<span class="num">{{rHeight}}</span>]</p>
+             <div class="tr-box" id="tr_h">
+
+             </div>
+              
+          </div>
+
+             <div class="text-zui text-radius">
+                <p>相当于X的位置 [<span class="num">{{rX}}</span>]</p>
+                <div class="tr-box" id="tr_x">
+
+                </div>
+            </div>
+            <div class="text-zui text-arc">
+                <p>相当于Y的位置 [<span class="num">{{rY}}</span>]</p>
+                <div class="tr-box" id="tr_y">
+
+                </div>
+            </div>
+ 
+         </div>`;
          } else {
              var template = ``;
          }
@@ -487,7 +625,7 @@
      
                  //设置字体大小
                  const elemId = $('.selectBox').parent().parent().attr("data-id");
-                 console.log(contentList[elemId])
+                //  console.log(contentList[elemId])
      
                  contentList[elemId].obj.setFontSize($(this).attr("oliName"))
                  myCanvasOne.init(contentList);
@@ -504,7 +642,7 @@
                      //设置字体粗细
                      const elemId = $(this).parent().parent().attr("data-id");
                      contentList[elemId].obj.setFontWeight('900');
-                     console.log(contentList[elemId].obj)
+                    //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
@@ -524,7 +662,7 @@
                      //设置字体粗细
                      const elemId = $(this).parent().parent().attr("data-id");
                      contentList[elemId].obj.setFontStyle('italic');
-                     console.log(contentList[elemId].obj)
+                    //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
@@ -667,7 +805,7 @@
      
                  //设置字体大小
                  const elemId = $('.selectBox').parent().parent().attr("data-id");
-                 console.log(contentList[elemId])
+                //  console.log(contentList[elemId])
      
                  contentList[elemId].obj.setFontSize($(this).attr("oliName"))
                  myCanvasOne.init(contentList);
@@ -684,7 +822,7 @@
                      //设置字体粗细
                      const elemId = $(this).parent().parent().attr("data-id");
                      contentList[elemId].obj.setFontWeight('900');
-                     console.log(contentList[elemId].obj)
+                    //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
@@ -704,7 +842,7 @@
                      //设置字体粗细
                      const elemId = $(this).parent().parent().attr("data-id");
                      contentList[elemId].obj.setFontStyle('italic');
-                     console.log(contentList[elemId].obj)
+                    //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
@@ -841,7 +979,7 @@
      
                  //设置字体大小
                  const elemId = $('.selectBox').parent().parent().attr("data-id");
-                 console.log(contentList[elemId])
+                //  console.log(contentList[elemId])
      
                  contentList[elemId].obj.setFontSize($(this).attr("oliName"))
                  myCanvasOne.init(contentList);
@@ -858,7 +996,7 @@
                      //设置字体粗细
                      const elemId = $(this).parent().parent().attr("data-id");
                      contentList[elemId].obj.setFontWeight('900');
-                     console.log(contentList[elemId].obj)
+                    //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
@@ -878,7 +1016,7 @@
                      //设置字体粗细
                      const elemId = $(this).parent().parent().attr("data-id");
                      contentList[elemId].obj.setFontStyle('italic');
-                     console.log(contentList[elemId].obj)
+                    //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
@@ -952,11 +1090,183 @@
              //     }
              // })`
          } else if (countList[id].type == 'imgShape') {
-             var jsTemplate = ``;
+             var jsImgTemplate = `$('.img-item').click(function() {
+                $(".img-box").slideUp();
+                $(".item-img").show();
+                
+                contentList[$(this).parent().attr("data-id")].obj = new imgShape({
+                    img:$(this).children("img")[0]
+                });
+                //渲染画布
+                myCanvasOne.init(contentList);
+            
+                appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
+                
+            })`;
+             var jsTemplate = `
+            // 拖拽条
+            ZUI.silder({
+                elem: '#tr_img',
+                color: '#1E9FFF',
+                pos: '{{imgSize}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // console.log('move', num);
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字X并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setSize(Math.round(num)*2+30)
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            });
+            ZUI.silder({
+                elem: '#trx_img',
+                color: '#1E9FFF',
+                pos: '{{x}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // console.log('move', num);
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字X并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setX(Math.round(num))
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            })
+            ZUI.silder({
+                elem: '#tarc_img',
+                color: '#1E9FFF',
+                pos: '{{y}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字Y并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setY(Math.round(num))
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            })
+            ZUI.silder({
+                elem: '#tsp_img',
+                color: '#1E9FFF',
+                pos: '{{rotation}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字旋转并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setRotation(Math.round(num))
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            })
+            `;
+         } else if (countList[id].type == 'rectFrame') {
+             var jsTemplate = `ZUI.silder({
+                elem: '#tr_w',
+                color: '#1E9FFF',
+                pos: '{{rWidth}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字弧长并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setWidth(Math.round(num)*240/100)
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            });
+            ZUI.silder({
+                elem: '#tr_h',
+                color: '#1E9FFF',
+                pos: '{{rHeight}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字弧长并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setHeight(Math.round(num)*240/100)
+                    // console.log( contentList[elemId].obj)
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            });
+            ZUI.silder({
+                elem: '#tr_x',
+                color: '#1E9FFF',
+                pos: '{{rX}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字弧长并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setX(Math.round(num))
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            });
+            ZUI.silder({
+                elem: '#tr_y',
+                color: '#1E9FFF',
+                pos: '{{rY}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字弧长并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setY(Math.round(num))
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
+            });`;
          } else {
              var jsTemplate = ``;
          }
          if (countList[id].obj) {
+
              html += exports.renderTemplate(template, {
                  id: id,
                  str: countList[id].obj.str || '',
@@ -966,21 +1276,42 @@
                  sRadius: countList[id].obj.radius - 20,
                  start: countList[id].obj.start,
                  end: countList[id].obj.end,
-                 x: countList[id].obj.x / 266 * 100,
-                 y: countList[id].obj.y / 266 * 100,
+                 x: countList[id].obj.x / 250 * 100,
+                 y: countList[id].obj.y / 250 * 100,
                  rotation: countList[id].obj.rotation,
-                 thickness: countList[id].obj.thickness
+                 thickness: countList[id].obj.thickness,
+                 imgSize: countList[id].obj.imgSize / 2,
+                 rWidth: countList[id].obj.width / 240 * 100,
+                 rHeight: countList[id].obj.height / 240 * 100,
+                 rX: countList[id].obj.x - 5,
+                 rY: countList[id].obj.y - 5,
+
              });
              jsTemplate = exports.renderTemplate(jsTemplate, {
                  radius: countList[id].obj.radius - 10,
                  sRadius: countList[id].obj.radius - 20,
                  start: countList[id].obj.start,
                  end: countList[id].obj.end,
-                 x: countList[id].obj.x / 266 * 100,
-                 y: countList[id].obj.y / 266 * 100,
+                 x: countList[id].obj.x / 250 * 100,
+                 y: countList[id].obj.y / 250 * 100,
                  rotation: countList[id].obj.rotation,
-                 thickness: countList[id].obj.thickness
+                 thickness: countList[id].obj.thickness,
+                 imgSize: countList[id].obj.imgSize / 2,
+                 rWidth: countList[id].obj.width / 240 * 100,
+                 rHeight: countList[id].obj.height / 240 * 100,
+                 rX: countList[id].obj.x - 5,
+                 rY: countList[id].obj.y - 5,
              })
+         } else {
+             if (countList[id].type == "imgShape") {
+                 html += exports.renderTemplate(imgBox, {
+                     id: id,
+
+                 });
+                 jsTemplate = exports.renderTemplate(jsImgTemplate, {
+
+                 })
+             }
          }
 
 
