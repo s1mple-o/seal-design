@@ -22,6 +22,24 @@ a {
     *zoom: 1;
 }
 
+
+/* 字体文件 */
+
+@font-face {
+    font-family: "unnamedfont";
+    src: url(../font/unnamedfont.ttf);
+}
+
+@font-face {
+    font-family: "MD19";
+    src: url(../font/MD19.ttf);
+}
+
+@font-face {
+    font-family: "Angsa";
+    src: url(../font/Angsa.ttf);
+}
+
 .container {
     width: 800px;
     margin: 0 auto;
@@ -82,6 +100,39 @@ a {
     outline: 0;
     padding: 0 8px;
     text-decoration: none;
+}
+
+.choose-model #select_lang {
+    display: block;
+    width: 108px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    height: 28px;
+    line-height: 28px;
+    min-width: 54px;
+    outline: 0;
+    padding: 0 8px;
+    border: none;
+    text-decoration: none;
+}
+
+.choose-model #select_lang .selectUl {
+    height: auto;
+}
+
+.choose-model #select_lang .selectUl li {
+    background-color: #fff;
+    color: #000;
+    text-indent: 0;
+    cursor: pointer;
+}
+
+.choose-model #select_lang .selectUl li:hover {
+    background-color: #eee;
 }
 
 .m-tool-more {
@@ -449,6 +500,17 @@ a {
 .img-box .img-item img {
     width: 100%;
     height: 100%;
+}
+
+.seal-size {
+    width: 320px;
+    padding: 15px 0;
+    margin: 0 auto;
+}
+
+.seal-size input {
+    border: none;
+    outline: none;
 }
 
 @media screen and (max-width: 800px) {

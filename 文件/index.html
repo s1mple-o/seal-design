@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/swiper-bundle.css">
     <link rel="stylesheet" href="./css/easydropdown.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/weui.min.css">
     <link rel="stylesheet" href="./css/silder.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./js/silder.js"></script>
@@ -17,6 +18,12 @@
 </head>
 
 <body>
+
+    <div style="font-family: MD19;"></div>
+    <div style="font-family: mssans;"></div>
+    <div style="font-family: Helvetica;"></div>
+    <div style="font-family: Angsa;"></div>
+    <div style="font-family: sans-serif;"></div>
     <div class="container">
         <div class="title">
             <h3>印章设计</h3>
@@ -52,8 +59,19 @@
 
                     </div>
                 </div>
-                <div class="choose-model" id="ch_m">
-                    <!-- <a href="javascript:;">新的印章+</a> -->
+                <div class="choose-model">
+                    <!-- <a href="javascript:;" id="ch_m">新的印章+</a> -->
+                    <div class="selectBox" id="select_lang">
+                        <div class="inputCase">
+                            <input class="imitationSelect" type="text" oulname="" oulid="" value="Thai" readonly="" style="color: #fff;">
+                            <i class="fa fa-caret-down"><img src="./images/arrow_drop_down.png" alt=""></i>
+                        </div>
+                        <ul class="selectUl" id="select_lang_ul">
+
+                            <li oliname="Thai">Thai</li>
+                            <li oliname="Chinese">Chinese</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="content-bottom">
@@ -88,30 +106,7 @@
                             <div class="arrow-l" id="m_arrow_r"><img src="./images/arrow_left.png" alt=""></div>
                             <div class="cnt-box-out">
                                 <ul id="m-cnt-box-inner" style=" left: 0px;">
-                                    <li class="cnt-item active" data-id="0">
-                                        <a href="javascript:;">文字#0</a>
-                                        <div class="cls"></div>
-                                    </li>
-                                    <li class="cnt-item" data-id="1">
-                                        <div class="cls"></div>
-                                        <a href="javascript:;">文字#1</a>
-                                    </li>
-                                    <li class="cnt-item" data-id="2">
-                                        <div class="cls"></div>
-                                        <a href="javascript:;">文字#2</a>
-                                    </li>
-                                    <li class="cnt-item" data-id="3">
-                                        <div class="cls"></div>
-                                        <a href="javascript:;">文字#3</a>
-                                    </li>
-                                    <li class="cnt-item" data-id="4">
-                                        <div class="cls"></div>
-                                        <a href="javascript:;">文字#4</a>
-                                    </li>
-                                    <li class="cnt-item" data-id="5">
-                                        <div class="cls"></div>
-                                        <a href="javascript:;">文字#5</a>
-                                    </li>
+
                                 </ul>
                             </div>
 
@@ -132,6 +127,23 @@
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="seal-size">
+
+        <form>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label" style="font-size: 18px;">类别/尺寸</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="selectArea" name="city" placeholder="请选择类别/尺寸" readonly>
+                    </div>
+                </div>
+            </div>
+        </form>
+
     </div>
     <div class="type-seal-choones">
 
@@ -157,7 +169,7 @@
         </div>
     </div>
 </body>
-<script src="./js/common.js"></script>
+
 
 
 <script>
@@ -166,7 +178,38 @@
     var lockR = true;
     var mLockL = true;
     var mLockR = true;
+    //语言选择
 
+    var language = 'Thai';
+    $("#select_lang .imitationSelect").on("click", function() {
+        $(this).parent().next().toggle(); //ul弹窗展开
+        $(this).next().toggleClass("fa-caret-up") //点击input选择适合，小图标动态切换
+        if (event.stopPropagation) {
+            // 针对 Mozilla 和 Opera   
+            event.stopPropagation();
+        } else if (window.event) {
+            // 针对 IE   
+            window.event.cancelBubble = true;
+        }
+        /*阻止事件传播，事件从点击的元素出发，向外（window）传播，
+                     如果不写个阻止事件，会导致下面的document点击函数一起执行，导致显示失败*/
+
+    });
+    $("#select_lang_ul li").click(function(event) {
+        $(this).addClass("actived_li").siblings().removeClass("actived_li"); //点击当前的添加。actived_li这个类；其他的移除这个类名
+        var oliName = $(this).attr("oliName"); //定义一个name属性，获取点击的元素属性赋值到当前，方便动态化传值
+
+        $(this).parent().prev().children('.imitationSelect').val(oliName); //把当前点击的name赋值到显示的input的val里面
+        $(this).parent().prev().children().attr("oliName", oliName); //把当前点击的oliName赋值到显示的input的oliName里面
+        //渲染画布
+        language = oliName;
+        myCanvasOne.init(contentList);
+
+    });
+    $(document).click(function(event) {
+        $(".inputCase .fa").removeClass("fa-caret-up").addClass("fa-caret-down") //当点隐藏ul弹窗时候，把小图标恢复原状
+        $("#select_lang_ul").hide(); //当点击空白处，隐藏ul弹窗
+    });
     // 印章类型选择框
     $('#ch_m').click(function() {
         $('.type-seal-choones').show();
@@ -269,7 +312,7 @@
         }, 500)
     })
 </script>
-
+<script src="./js/common.js"></script>
 
 <script>
     const appendMenuData = Common.appendMenuData;
@@ -302,11 +345,11 @@
         type: 'roundShape',
         obj: new roundShape()
     });
-    contentList.push({
-        id: contentList.length,
-        type: 'rectFrame',
-        obj: new rectFrame()
-    });
+    // contentList.push({
+    //     id: contentList.length,
+    //     type: 'rectFrame',
+    //     obj: new rectFrame()
+    // });
 
 
 
@@ -320,6 +363,7 @@
 
     //渲染菜单
     appendMenuData("#cnt-box-inner", contentList, true);
+    appendMenuData("#m-cnt-box-inner", contentList, true);
     appendEditMenu("#edit_menu", contentList, true, 0);
 
 
@@ -333,6 +377,7 @@
         myCanvasOne.init(contentList);
         //渲染菜单
         appendMenuData("#cnt-box-inner", contentList, true);
+        appendMenuData("#m-cnt-box-inner", contentList, true);
         appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
     })
     bindEvent('.item-nt', function() {
@@ -345,6 +390,7 @@
         myCanvasOne.init(contentList);
         //渲染菜单
         appendMenuData("#cnt-box-inner", contentList, true);
+        appendMenuData("#m-cnt-box-inner", contentList, true);
         appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
     })
     bindEvent('.item-sp', function() {
@@ -357,6 +403,7 @@
         myCanvasOne.init(contentList);
         //渲染菜单
         appendMenuData("#cnt-box-inner", contentList, true);
+        appendMenuData("#m-cnt-box-inner", contentList, true);
         appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
     })
     bindEvent('.item-rf', function() {
@@ -369,6 +416,7 @@
         myCanvasOne.init(contentList);
         //渲染菜单
         appendMenuData("#cnt-box-inner", contentList, true);
+        appendMenuData("#m-cnt-box-inner", contentList, true);
         appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
     })
     bindEvent('.item-img', function() {
@@ -382,19 +430,58 @@
 
         //渲染菜单
         appendMenuData("#cnt-box-inner", contentList, true);
+        appendMenuData("#m-cnt-box-inner", contentList, true);
         appendEditMenu("#edit_menu", contentList, true, contentList.length - 1);
     })
 </script>
-<script>
-</script>
+
 
 <script>
-    //发送图片数据
-    $("#save").click(function() {
-        var data = canvas.toDataURL('image/png');
-        // console.log(data)
+    $(function() {
 
+        // 点击尺寸
+        $('#selectArea').on('click', function() {
+            sizeData.forEach(function(ele) {
+                if (ele.label == "圆形") {
+                    ele.children.forEach(function(ele) {
+                        // ele.children = null;
+                    })
+                }
+
+            });
+            weui.picker(sizeData, {
+                defaultValue: ["1", "38", "38"],
+                onConfirm: function(result) {
+                    var str = "";
+                    var cityArr = [];
+                    result.map(function(val, i) {
+                        if (i == 0) {
+                            str += val["label"] + ' ';
+                        } else if (i == 1) {
+                            str += val["label"] + '/';
+                        } else {
+                            str += val["label"] + ' ';
+                        }
+
+                        cityArr.push(i["value"]);
+                    });
+                    // console.log(cityArr);
+                    $("#selectArea").val(str);
+                    $("#selectArea").attr("cityArr", cityArr);
+
+                }
+            })
+        });
+        //发送图片数据
+        $("#save").click(function() {
+            var data = canvas.toDataURL('image/png');
+            // console.log(data)
+
+        });
     })
 </script>
+<script src="./js/city.daili.js"></script>
+<script src="./js/weui.min.js"></script>
+
 
 </html>

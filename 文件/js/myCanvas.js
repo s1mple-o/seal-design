@@ -44,18 +44,20 @@ class myCanvas {
  *@param {String} fontFamily 文本文字字体
  *@param {String} fontWeigth 文本文字粗细
  *@param {String} fontStyle 文本文字倾斜
+ หนองปรือ,บางละมุง,ชลบุรี
  */
 class roundText {
     constructor(obj) {
         obj = obj || {};
-        this.str = obj.str || '样本';
+        this.str = obj.str || 'หันํอิงุอูอ่อ้อ๊อ๋อ็อ์อ๎อปรือบางละมุงชลบุรี';
         this.radius = obj.radius || 110;
         this.start = obj.start || 0;
-        this.end = obj.end || 50;
+        this.end = obj.end || this.str.length * 1.5;
         this.fontSize = obj.fontSize || 18;
-        this.fontFamily = obj.fontFamily || 'arial';
+        this.fontFamily = obj.fontFamily || 'MD19';
         this.fontWeigth = obj.fontWeigth || 'normal';
         this.fontStyle = obj.fontStyle || 'normal';
+        this.isThai = true;
     }
 
 
@@ -70,26 +72,218 @@ class roundText {
             radius: r
         }
 
+        //this.isThai ? (0.030 * Math.PI * 100 / r) + (this.fontSize - 16) * 0.007 : (0.070 * Math.PI * 100 / r);(start - end) / (txt.length - 1)
         var radius = circle.radius - (this.fontSize > 32 ? (this.fontSize * 3 / 4) : (this.fontSize * 1 / 3)); //圆的半径
-        var angleDecrement = (start - end) / (txt.length - 1) //每个字母占的弧度
+        var angleDecrement = language == 'Thai' ? (this.fontSize - 2) / (this.radius + 40) : (this.fontSize + 2) / (this.radius); //每个字母占的弧度
         var angle = parseFloat(start) //转一下数字
         var index = 0;
         var character;
         ctx.save();
         ctx.fillStyle = color || "#000";
-        ctx.textAlign = "center";
+
         ctx.textBaseLine = "hanging";
         ctx.font = this.fontStyle + " normal " + " " + this.fontWeigth + " " + this.fontSize + "px " + this.fontFamily;
         while (index < txt.length) {
             character = txt.charAt(index)
-            ctx.save()
-            ctx.beginPath()
-            ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
-            ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
-            ctx.fillText(character, 0, 0)
-            angle -= angleDecrement
-            index++
-            ctx.restore()
+                // console.log(character);
+                // ctx.save()
+                // ctx.beginPath()
+                // ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                // ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                // ctx.fillText(character, 0, 0)
+                // index++;
+                // angle -= angleDecrement;
+                // ctx.restore();
+
+            if (character == 'ื') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+            } else if (character == '่') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+            } else if (character == 'ั') {
+                // console.log("if", "ั")
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+            } else if (character == 'ู') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+            } else if (character == 'ิ') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+            } else if (character == 'ี') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+            } else if (character == '้') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == 'ุ') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == 'ู') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == 'ํ') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '่') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '้') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '๊') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '๋') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '็') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '์') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '๎') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else if (character == '๎') {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                index++
+                ctx.restore()
+
+            } else {
+                ctx.save()
+                ctx.textAlign = "left";
+                ctx.beginPath()
+                ctx.translate(circle.x + Math.cos(angle) * radius, circle.y - Math.sin(angle) * radius)
+                ctx.rotate(Math.PI / 2 - angle) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                ctx.fillText(character, 0, 0)
+                angle -= angleDecrement
+                index++
+                ctx.restore()
+            }
+
+
+
 
         }
         ctx.restore()
@@ -106,7 +300,12 @@ class roundText {
         this.start = start;
     }
     setEnd(end) {
-        this.end = end;
+        if (end > (this.str.length * 1.5) + this.radius / 50) {
+            this.end = this.str.length * 1.5 + this.radius / 50;
+        } else {
+            this.end = end;
+        }
+
     }
     setFontSize(fontSize) {
         this.fontSize = fontSize;
@@ -168,22 +367,23 @@ class roundShape {
 class normalText {
     constructor(obj) {
         obj = obj || {};
-        this.str = obj.str || '样本'
+        this.str = obj.str || 'หันํอิงุอูอ่'
         this.x = obj.x || 125;
         this.y = obj.y || 125;
         this.fontSize = obj.fontSize || 18;
         this.rotation = obj.rotation || 50;
-        this.fontFamily = obj.fontFamily || 'arial';
+        this.fontFamily = obj.fontFamily || 'MD19';
         this.fontWeigth = obj.fontWeigth || 'normal';
         this.fontStyle = obj.fontStyle || 'normal';
     }
     draw(color) {
         ctx.save();
         ctx.fillStyle = color || "#000";
-        ctx.textAlign = "center";
+        ctx.textAlign = "left";
         ctx.textBaseLine = "middle";
+        console.log(this.fontFamily)
         ctx.font = this.fontStyle + " normal " + "" + this.fontWeigth + " " + this.fontSize + "px " + this.fontFamily;
-        ctx.translate(this.x, this.y)
+        ctx.translate(this.x - this.fontSize, this.y)
         ctx.rotate((((this.rotation * 1 / 50) + 1)) * Math.PI) //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
         ctx.fillText(this.str, 0, 0);
         ctx.restore()
@@ -280,9 +480,11 @@ class rectFrame {
         this.height = obj.height || 240;
         this.x = obj.x || 5;
         this.y = obj.y || 5;
+        this.thickness = obj.thickness || 1;
     }
     draw() {
         ctx.save();
+        ctx.lineWidth = this.thickness;
         ctx.strokeRect(this.x, this.y, this.width, this.height)
 
         ctx.restore()
@@ -299,5 +501,8 @@ class rectFrame {
     }
     setY(y) {
         this.y = y * 250 / 100;
+    }
+    setThickness(thickness) {
+        this.thickness = thickness;
     }
 }

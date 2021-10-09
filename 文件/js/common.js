@@ -289,10 +289,12 @@
             <div class="text-style">
                 <div class="selectBox" id="select_ff">
                     <div class="inputCase">
-                        <input class="imitationSelect" type="text" oulname="" oulid="" value="{{fontFamliy}}" readonly="">
+                        <input class="imitationSelect" type="text" oulname="" oulid="" value="{{fontFamily}}" readonly="">
                         <i class="fa fa-caret-down"><img src="./images/arrow_drop_down.png" alt=""></i>
                     </div>
                     <ul class="selectUl" id="select_ff_ul">
+                       
+                        <li oliname="MD19" class="actived_li">MD19</li>
                         <li oliname="Arial" class="actived_li">Arial</li>
                         <li oliname="Helvetica">Helvetica</li>
                         <li oliname="sans-serif">sans-serif</li>
@@ -356,12 +358,12 @@
         
         
             </div>
-            <div class="text-zui text-arc">
+            <!-- <div class="text-zui text-arc">
                 <p>文字弧长 [<span class="num">{{end}}</span>]</p>
                 <div class="tr-box" id="tarc_ts">
         
                 </div>
-            </div>
+            </div>  -->
             <div class="text-zui text-sp">
                 <p>文字起始点 [<span class="num">{{start}}</span>]</p>
                 <div class="tr-box" id="tsp_ts">
@@ -371,7 +373,7 @@
             
         </div>`;
          } else if (countList[id].type == 'normalText') {
-             var template = `<div class="item text-shape" data-id="1">
+             var template = `<div class="item text-shape" data-id="{{id}}">
             <div class="text-style">
                 <div class="selectBox" id="select_ff">
                     <div class="inputCase">
@@ -379,7 +381,9 @@
                         <i class="fa fa-caret-down"><img src="./images/arrow_drop_down.png" alt=""></i>
                     </div>
                     <ul class="selectUl" id="select_ff_ul">
-                        <li oliname="Arial" class="actived_li">Arial</li>
+                    
+                    <li oliname="MD19" >MD19</li>
+                        <li oliname="Arial" >Arial</li>
                         <li oliname="Helvetica">Helvetica</li>
                         <li oliname="sans-serif">sans-serif</li>
                     </ul>
@@ -560,6 +564,12 @@
 
                 </div>
             </div>
+            <div class="text-zui text-arc">
+                <p>厚度 [<span class="num">{{thickness}}</span>]</p>
+                <div class="tr-box" id="tr_th">
+
+                </div>
+            </div>
  
          </div>`;
          } else {
@@ -591,7 +601,8 @@
                  $(this).parent().prev().children().attr("oliName", oliName); //把当前点击的oliName赋值到显示的input的oliName里面
      
                  //设置字体
-                 const elemId = $('.selectBox').parent().parent().attr("data-id");
+                 const elemId = $('.selectBox').parent().parent('.item').attr("data-id");
+                //  console.log($('.selectBox').parent().parent('.item').attr("data-id"))
                  contentList[elemId].obj.setFontFamily($(this).attr("oliName"))
                  myCanvasOne.init(contentList);
              });
@@ -624,7 +635,7 @@
      
      
                  //设置字体大小
-                 const elemId = $('.selectBox').parent().parent().attr("data-id");
+                 const elemId = $('.selectBox').parent().parent('.item').attr("data-id");
                 //  console.log(contentList[elemId])
      
                  contentList[elemId].obj.setFontSize($(this).attr("oliName"))
@@ -640,13 +651,13 @@
                  if (!$(this).hasClass('font-b-active')) {
      
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontWeight('900');
                     //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontWeight('500');
                      myCanvasOne.init(contentList);
      
@@ -660,13 +671,13 @@
                  if (!$(this).hasClass('font-i-active')) {
      
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontStyle('italic');
                     //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontStyle('normal');
                      myCanvasOne.init(contentList);
      
@@ -710,7 +721,7 @@
                  color: '#1E9FFF',
                  pos: '{{end}}%',
                  showNum: true,
-                 count: 100,
+                 count: {{100}},
                  disable: false,
                  callBackMove: function(num) {
                      // console.log('move', num);
@@ -771,7 +782,7 @@
                  $(this).parent().prev().children().attr("oliName", oliName); //把当前点击的oliName赋值到显示的input的oliName里面
      
                  //设置字体
-                 const elemId = $('.selectBox').parent().parent().attr("data-id");
+                 const elemId = $('.selectBox').parent().parent('.item').attr("data-id");
                  contentList[elemId].obj.setFontFamily($(this).attr("oliName"))
                  myCanvasOne.init(contentList);
              });
@@ -804,7 +815,7 @@
      
      
                  //设置字体大小
-                 const elemId = $('.selectBox').parent().parent().attr("data-id");
+                 const elemId = $('.selectBox').parent().parent('.item').attr("data-id");
                 //  console.log(contentList[elemId])
      
                  contentList[elemId].obj.setFontSize($(this).attr("oliName"))
@@ -820,13 +831,13 @@
                  if (!$(this).hasClass('font-b-active')) {
      
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontWeight('900');
                     //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontWeight('500');
                      myCanvasOne.init(contentList);
      
@@ -840,13 +851,13 @@
                  if (!$(this).hasClass('font-i-active')) {
      
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontStyle('italic');
                     //  console.log(contentList[elemId].obj)
                      myCanvasOne.init(contentList);
                  } else {
                      //设置字体粗细
-                     const elemId = $(this).parent().parent().attr("data-id");
+                     const elemId = $(this).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setFontStyle('normal');
                      myCanvasOne.init(contentList);
      
@@ -858,7 +869,7 @@
              $(".str").bind('input propertychange', function() {
                  var a = $(".box1").val();
                  // 设置文字并重新渲染
-                 const elemId = $(this).parent().parent().attr("data-id");
+                 const elemId = $(this).parent().parent('.item').attr("data-id");
                  contentList[elemId].obj.setStr($(this).val())
                  myCanvasOne.init(contentList);
              })
@@ -875,7 +886,7 @@
                      // 拖拽条数据显示同步
                      $(this.elem).siblings('p').children('.num').text(Math.round(num));
                      // 设置文字X并重新渲染
-                     const elemId = $(this.elem).parent().parent().attr("data-id");
+                     const elemId = $(this.elem).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setX(Math.round(num))
                      myCanvasOne.init(contentList);
                  },
@@ -894,7 +905,7 @@
                      // 拖拽条数据显示同步
                      $(this.elem).siblings('p').children('.num').text(Math.round(num));
                      // 设置文字Y并重新渲染
-                     const elemId = $(this.elem).parent().parent().attr("data-id");
+                     const elemId = $(this.elem).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.setY(Math.round(num))
                      myCanvasOne.init(contentList);
                  },
@@ -913,7 +924,7 @@
                      // 拖拽条数据显示同步
                      $(this.elem).siblings('p').children('.num').text(Math.round(num));
                      // 设置文字旋转并重新渲染
-                     const elemId = $(this.elem).parent().parent().attr("data-id");
+                     const elemId = $(this.elem).parent().parent('.item').attr("data-id");
                      contentList[elemId].obj.SetRotation(Math.round(num))
                      myCanvasOne.init(contentList);
                  },
@@ -1261,6 +1272,25 @@
                 callBackMouseup: function(num) {
                     // console.log('up', num);
                 }
+            });
+            ZUI.silder({
+                elem: '#tr_th',
+                color: '#1E9FFF',
+                pos: '{{thickness}}%',
+                showNum: true,
+                count: 100,
+                disable: false,
+                callBackMove: function(num) {
+                    // 拖拽条数据显示同步
+                    $(this.elem).siblings('p').children('.num').text(Math.round(num));
+                    // 设置文字弧长并重新渲染
+                    const elemId = $(this.elem).parent().parent().attr("data-id");
+                    contentList[elemId].obj.setThickness(Math.round(num)*2)
+                    myCanvasOne.init(contentList);
+                },
+                callBackMouseup: function(num) {
+                    // console.log('up', num);
+                }
             });`;
          } else {
              var jsTemplate = ``;
@@ -1270,7 +1300,7 @@
              html += exports.renderTemplate(template, {
                  id: id,
                  str: countList[id].obj.str || '',
-                 fontFamliy: countList[id].obj.fontFamliy,
+                 fontFamily: countList[id].obj.fontFamily,
                  fontSize: countList[id].obj.fontSize,
                  radius: countList[id].obj.radius - 10,
                  sRadius: countList[id].obj.radius - 20,
